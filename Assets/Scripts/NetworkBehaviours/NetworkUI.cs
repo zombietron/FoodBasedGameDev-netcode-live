@@ -5,7 +5,6 @@ using Unity.Netcode;
 using UnityEngine.UI;
 public class NetworkUI : MonoBehaviour
 {
-    //OWNERSHIP means WHO IS SIMULATING THIS OBJECT (moving, rotating, etc). 
 
 
     public void StartServerOnClick()
