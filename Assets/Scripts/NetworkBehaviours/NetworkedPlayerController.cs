@@ -16,12 +16,15 @@ public class NetworkedPlayerController : NetworkBehaviour
     Vector3 finalMove;
 
     PlayerInput playerInput;
+
+    Animator anim;
     //OWNERSHIP means WHO IS SIMULATING THIS OBJECT (moving, rotating, etc). 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         pActions = new FoodBasedGameDevPlayerActions();
         pActions.Enable();
     }
@@ -39,6 +42,9 @@ public class NetworkedPlayerController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        //This is to prevent the PlayerInput component from fighting with other instances
+        //check if the object has a player component, if so, disable it unless its on the owner
+
         playerInput = GetComponent<PlayerInput>();
         if (playerInput != null)
         {
@@ -67,7 +73,13 @@ public class NetworkedPlayerController : NetworkBehaviour
     {
        transform.Translate(move,Space.World);
        transform.rotation =  Quaternion.LookRotation(move);
-       
+
+        if (move != Vector3.zero)
+        {
+            anim.SetBool("isRunning", true);
+        }
+        else
+            anim.SetBool("isRunning", false);
     }
 
     //when the throw action is activated (spacebar pressed)
@@ -85,7 +97,7 @@ public class NetworkedPlayerController : NetworkBehaviour
     public void ThrowHotDogRpc()
     {
         //NetworkObjectSpawner.SpawnNewNetworkObject(hotDogPrefab, spawnPos.position);
-        var spawnedHotDog = NetworkObjectPool.Singleton.GetNetworkObject(hotDogPrefab, spawnPos.position, Quaternion.identity);
+        var spawnedHotDog = NetworkObjectPool.Singleton.GetNetworkObject(hotDogPrefab, spawnPos.position, spawnPos.rotation);
         spawnedHotDog.Spawn();
         Debug.Log("I THREW A HOTDOG!");
     }
