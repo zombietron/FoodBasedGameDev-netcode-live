@@ -423,6 +423,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  spawnPos: {fileID: 110650814}
+  hotDogPrefab: {fileID: 8959947128519048034, guid: b7681bf94c8997e44ab7bddea3d74f76,
+    type: 3}
 --- !u!114 &6535350891591156714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,6 +830,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3129276877029796986}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: daa3c5696539b5742a9d0565deca4e2b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 835352764914505271}
   m_SourcePrefab: {fileID: 100100000, guid: daa3c5696539b5742a9d0565deca4e2b, type: 3}
 --- !u!4 &1661406830936577411 stripped
 Transform:
@@ -884,3 +891,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &835352764914505271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037122476031446841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 3129276877029796986}

@@ -8,27 +8,44 @@ public class NetworkPlayerIdentifier : NetworkBehaviour
 {
 
     [SerializeField] TextMeshProUGUI playerID;
-
+    
+    //this network variable is updated OnNetworkSpawn with the OwnerClientID from the network behaviour
+    //that throws OnNetworkSpawn
+    NetworkVariable<ulong> playerIdNetworkV = new NetworkVariable<ulong>();
+    //flag set to make sure this only hits on first update and then stops
+    bool isPlayerIdSet = false;
+    
     //fires when the object is spawned on the network. 
     //utilizing to set the field when client joins
     public override void OnNetworkSpawn()
     {
-        // the client if not connected is not getting th information set, therefore it is not updating. 
-        // fix for next week. 
-        base.OnNetworkSpawn();
         
-        if (!IsOwner) return;
+        if (IsServer)
+        {
+            playerIdNetworkV.Value = OwnerClientId +1;
+        }   
 
-        var id = $"P{NetworkManager.LocalClientId + 1}";
-        SetPlayerIdentifierTextRpc(id);
+        base.OnNetworkSpawn();
+
 
     }
 
-    //This notifies all clients and hosts of the updated text field value
-    //without this the data will not sync
-    [Rpc(SendTo.ClientsAndHost)]
-    public void SetPlayerIdentifierTextRpc(string val) 
+
+
+    private void Update()
     {
-        playerID.text = val;
+        if (!isPlayerIdSet)
+        {
+            SetPlayerIdText();
+            isPlayerIdSet = true;
+        }
     }
+
+    //set the playerId UGUI text to the updated Network Variable
+    public void SetPlayerIdText()
+    {
+        playerID.text = $"P{playerIdNetworkV.Value}";
+    }
+
+
 }

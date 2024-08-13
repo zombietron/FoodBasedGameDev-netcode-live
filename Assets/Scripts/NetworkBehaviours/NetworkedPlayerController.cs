@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.InputSystem;
 
 public class NetworkedPlayerController : NetworkBehaviour
 {
     private FoodBasedGameDevPlayerActions pActions;
 
+    
     [SerializeField] float moveSpeed;
+    [SerializeField] Transform spawnPos;
+    [SerializeField] GameObject hotDogPrefab;
 
     Vector3 finalMove;
-    
+
+    PlayerInput playerInput;
     //OWNERSHIP means WHO IS SIMULATING THIS OBJECT (moving, rotating, etc). 
 
 
@@ -32,10 +37,56 @@ public class NetworkedPlayerController : NetworkBehaviour
 
     }
 
+    public override void OnNetworkSpawn()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        if (playerInput != null)
+        {
+            if (IsOwner)
+            {
+                playerInput.enabled = true;
+            }
+            else
+                playerInput.enabled = false;
+        } 
+
+        base.OnNetworkSpawn();
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if(playerInput !=null)
+        {
+            playerInput.enabled = false;
+        }
+
+        base.OnNetworkDespawn();
+    }
+
     public void MoveMe(Vector3 move)
     {
        transform.Translate(move,Space.World);
        transform.rotation =  Quaternion.LookRotation(move);
+       
     }
 
+    //when the throw action is activated (spacebar pressed)
+    public void OnThrow()
+    {
+        if (IsOwner && IsClient)
+        {
+            ThrowHotDogRpc();
+        }
+    }
+
+
+    //send request to server to instantiate the hotdog and spawn at the correct position
+    [Rpc(SendTo.Server)]
+    public void ThrowHotDogRpc()
+    {
+        //NetworkObjectSpawner.SpawnNewNetworkObject(hotDogPrefab, spawnPos.position);
+        var spawnedHotDog = NetworkObjectPool.Singleton.GetNetworkObject(hotDogPrefab, spawnPos.position, Quaternion.identity);
+        spawnedHotDog.Spawn();
+        Debug.Log("I THREW A HOTDOG!");
+    }
 }
