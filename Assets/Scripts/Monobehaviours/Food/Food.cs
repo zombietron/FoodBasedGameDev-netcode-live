@@ -1,40 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Food : MonoBehaviour
+public class Food : NetworkBehaviour
 {
     [SerializeField]
-    int hungerReductionAmount = 50;
+    private int hungerReductionAmount = 50;
 
-    PooledObjectBehaviour poolObjectBehavior;
+    [SerializeField]
+    private PizzaBombProjectiles pizzaParent;
 
-    [SerializeField] PizzaBombProjectiles pizzaParent;
-    [SerializeField] AudioSource impactSound;
-    private void Start()
+    [SerializeField]
+    private AudioSource impactSound;
+
+    [SerializeField]
+    private GameObject foodOriginalPrefab;
+
+    [SerializeField]
+    [Range(0f, 15f)]
+    private float foodLifetime = 5f;
+
+    private void FixedUpdate()
     {
-        poolObjectBehavior = GetComponent<PooledObjectBehaviour>();
+        if (!IsServer)
+            return;
+
+        foodLifetime -= Time.deltaTime;
+
+        if (foodLifetime <= 0f)
+            ReturnFoodToPool();
     }
+
     private void OnTriggerEnter(Collider collision)
     {
+        if (!IsServer)
+            return;
+
         AudioSource.PlayClipAtPoint(impactSound.clip,transform.position);
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<HP>().ReduceHP(hungerReductionAmount);
-        }  
 
-
-        if (poolObjectBehavior != null)
-        {
-            if (pizzaParent==null)
-            { poolObjectBehavior.ReturnToPool(); }
-            else
-            {
-                Debug.Log("Pizza Slice has collided");
-                pizzaParent.DecrementProjectile();
-                gameObject.SetActive(false);
-            }
+            ReturnFoodToPool();
         }
     }
 
+    private void ReturnFoodToPool()
+    {
+        NetworkObject.Despawn(false);
+
+        // TODO: fix this line, because returning the object like this does not work
+        NetworkObjectPool.Singleton.ReturnNetworkObject(NetworkObject, foodOriginalPrefab);
+    }
 }

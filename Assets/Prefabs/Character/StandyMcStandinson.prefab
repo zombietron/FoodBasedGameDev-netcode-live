@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  spawnPos: {fileID: 110650814}
+  spawnTransform: {fileID: 110650814}
   hotDogPrefab: {fileID: 8959947128519048034, guid: b7681bf94c8997e44ab7bddea3d74f76,
     type: 3}
 --- !u!114 &6535350891591156714
