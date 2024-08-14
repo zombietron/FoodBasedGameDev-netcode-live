@@ -12,7 +12,6 @@ public class TimerUiNetworked : NetworkBehaviour
     NetworkVariable<int> networkTimerVariable = new NetworkVariable<int>();
     NetworkVariable<bool> networkTimerComplete = new NetworkVariable<bool>();
 
-    // Start is called before the first frame update
    public override void OnNetworkSpawn()
     {
         if(networkTimerComplete.Value)
