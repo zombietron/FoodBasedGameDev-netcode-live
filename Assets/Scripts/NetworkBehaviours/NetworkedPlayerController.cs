@@ -102,6 +102,7 @@ public class NetworkedPlayerController : NetworkBehaviour
             spawnTransform.position,
             spawnTransform.rotation);
 
+        spawnedHotDog.GetComponent<Food>().foodOriginalPrefab = hotDogPrefab;
         spawnedHotDog.Spawn();
 
         Debug.Log("I THREW A HOTDOG!");

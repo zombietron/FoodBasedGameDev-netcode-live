@@ -12,21 +12,30 @@ public class Food : NetworkBehaviour
     [SerializeField]
     private AudioSource impactSound;
 
-    [SerializeField]
-    private GameObject foodOriginalPrefab;
+    [HideInInspector]
+    public GameObject foodOriginalPrefab;
 
     [SerializeField]
     [Range(0f, 15f)]
     private float foodLifetime = 5f;
+
+    private float currentFoodLifetime = 0f;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        currentFoodLifetime = foodLifetime;
+    }
 
     private void FixedUpdate()
     {
         if (!IsServer)
             return;
 
-        foodLifetime -= Time.deltaTime;
+        currentFoodLifetime -= Time.deltaTime;
 
-        if (foodLifetime <= 0f)
+        if (currentFoodLifetime <= 0f)
             ReturnFoodToPool();
     }
 
@@ -48,7 +57,6 @@ public class Food : NetworkBehaviour
     {
         NetworkObject.Despawn(false);
 
-        // TODO: fix this line, because returning the object like this does not work
         NetworkObjectPool.Singleton.ReturnNetworkObject(NetworkObject, foodOriginalPrefab);
     }
 }
