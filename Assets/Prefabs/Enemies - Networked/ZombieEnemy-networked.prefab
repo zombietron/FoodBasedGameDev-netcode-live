@@ -140,10 +140,9 @@ GameObject:
   - component: {fileID: 7206557451152205744}
   - component: {fileID: 3091242180788773371}
   - component: {fileID: 2638551635832369896}
+  - component: {fileID: 2651702898632108333}
   - component: {fileID: 4836455007794047367}
   - component: {fileID: 2934163316712619452}
-  - component: {fileID: 7229320754309280348}
-  - component: {fileID: 2651702898632108333}
   - component: {fileID: -4620866879267322835}
   - component: {fileID: -1037440569395688945}
   - component: {fileID: -1636693943029233664}
@@ -226,6 +225,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 5
+--- !u!114 &2651702898632108333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6332301642665068665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1189115583
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &4836455007794047367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8d576a1f204a145ac533763489be2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   agentSpeed: 2
   selectedTarget: {fileID: 0}
   inAttackRange:
@@ -277,39 +298,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7229320754309280348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6332301642665068665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e230a52e0ec464fb6ff9faba59a217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2651702898632108333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6332301642665068665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1189115583
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &-4620866879267322835
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class TimerUiNetworked : NetworkBehaviour
 
         if(IsServer && !networkTimerComplete.Value)
         {
-            StartCoroutine(RunTimer(timerLength));
+            StartCoroutine(StartTimer(timerLength));
         }
         base.OnNetworkSpawn();
 
@@ -31,7 +31,7 @@ public class TimerUiNetworked : NetworkBehaviour
 
 
 
-    public IEnumerator RunTimer(int length)
+    public IEnumerator StartTimer(int length)
     {
         networkTimerVariable.Value = length;
 

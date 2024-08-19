@@ -4084,8 +4084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveState: 0
   wave: {fileID: 390030125}
-  spawnController: {fileID: 1795915035}
-  timer: {fileID: 0}
+  spawnController: {fileID: 1795915038}
+  timer: {fileID: 533205061}
 --- !u!114 &390030125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4706,7 +4706,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531537236}
-  - component: {fileID: 531537235}
+  - component: {fileID: 531537237}
+  - component: {fileID: 531537238}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4714,20 +4715,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &531537235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531537234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b8c5b5e05152654d86f406fe3022ac7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waveMgr: {fileID: 390030124}
-  gameState: 0
 --- !u!4 &531537236
 Transform:
   m_ObjectHideFlags: 0
@@ -4743,6 +4730,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!114 &531537237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531537234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 370051291
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &531537238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531537234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23442529d3b4a6448bcd90b51fcc3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveMgr: {fileID: 390030124}
+  gameState: 0
 --- !u!1 &533205054
 GameObject:
   m_ObjectHideFlags: 0
@@ -7663,10 +7685,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 581773311}
   - {fileID: 730947706}
   - {fileID: 381753317}
   - {fileID: 1480713720}
-  - {fileID: 581773311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!4 &825703332 stripped
@@ -11862,6 +11884,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PooledPrefabsList:
   - Prefab: {fileID: 8959947128519048034, guid: b7681bf94c8997e44ab7bddea3d74f76,
+      type: 3}
+    PrewarmCount: 100
+  - Prefab: {fileID: 1466558162866578227, guid: cc7ab87c8c9c5e34c8dafa8d555c6ba4,
+      type: 3}
+    PrewarmCount: 100
+  - Prefab: {fileID: 5370329103413764276, guid: 69c2b0700432a5248bd355ffd77f2559,
+      type: 3}
+    PrewarmCount: 100
+  - Prefab: {fileID: 2087945107681448215, guid: a83c46ccea5c4b340ac2e0103c575a6c,
+      type: 3}
+    PrewarmCount: 100
+  - Prefab: {fileID: 8079444773405177413, guid: 2fcc8a315c016e344842a458d2d20f0c,
+      type: 3}
+    PrewarmCount: 100
+  - Prefab: {fileID: 5128503162650683796, guid: f7adcd66cc87600449e87079b33594e5,
+      type: 3}
+    PrewarmCount: 100
+  - Prefab: {fileID: 6332301642665068665, guid: f690fb9359d514d4e88053db3304ca81,
       type: 3}
     PrewarmCount: 100
 --- !u!4 &1203547166
@@ -75968,7 +76008,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1795915036}
-  - component: {fileID: 1795915035}
+  - component: {fileID: 1795915037}
+  - component: {fileID: 1795915038}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -75976,30 +76017,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1795915035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795915034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70e66d421b9c7ff4fbe1e1ab7d72b45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnGap: 1
-  enemyPools:
-  - {fileID: 900441125}
-  - {fileID: 1946831185}
-  - {fileID: 1393656529}
-  spawnPoints:
-  - {fileID: 581773311}
-  - {fileID: 730947706}
-  - {fileID: 381753317}
-  - {fileID: 1480713720}
-  waveMgr: {fileID: 390030124}
-  enemiesInScene: []
 --- !u!4 &1795915036
 Transform:
   m_ObjectHideFlags: 0
@@ -76015,6 +76032,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!114 &1795915037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795915034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1513401928
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1795915038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795915034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fc0cdbe206c174b90de2bc91353888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnGap: 1
+  enemyPools:
+  - {fileID: 2651702898632108333, guid: f690fb9359d514d4e88053db3304ca81, type: 3}
+  - {fileID: 628164905939930170, guid: f7adcd66cc87600449e87079b33594e5, type: 3}
+  - {fileID: 8876669130185371869, guid: 2fcc8a315c016e344842a458d2d20f0c, type: 3}
+  spawnPoints:
+  - {fileID: 581773311}
+  - {fileID: 730947706}
+  - {fileID: 381753317}
+  - {fileID: 1480713720}
+  waveMgr: {fileID: 390030124}
+  enemiesInScene: []
 --- !u!4 &1801635057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f271a9bfe84655b4bb9dfda0312dff49,

@@ -15,13 +15,13 @@ public class WaveManager : MonoBehaviour
 
     public Wave wave;
 
-    public SpawnController spawnController;
+    public SpawnManager_Networked spawnController;
 
     public delegate void ChangeWaveState(WaveState state);
 
     public static ChangeWaveState changeWaveState;
 
-    [SerializeField] TimerUI timer;
+    [SerializeField] TimerUiNetworked timer;
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class WaveManager : MonoBehaviour
                 else
                     wave.ProgressWave();
                 timer.gameObject.SetActive(true);
-                timer.StartTimer();
+                timer.StartTimer(3);
                 break;
 
             case WaveState.running:

@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871591959814029486}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1707444456500644781}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &3537466071599834138
 AudioSource:
@@ -133,6 +133,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a8f4b6c702115544d82f1f80777cdb28,
@@ -201,6 +202,41 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3838383124528825187}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2616912943623212453}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3537342275984724640}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7664715938075093768}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 602762528265641409}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6721675128959813391}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8823509108051141818}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8f4b6c702115544d82f1f80777cdb28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9129218904389032616}
   m_SourcePrefab: {fileID: 100100000, guid: a8f4b6c702115544d82f1f80777cdb28, type: 3}
 --- !u!4 &1707444456500644781 stripped
 Transform:
@@ -221,10 +257,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087945107681448215}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -238,9 +285,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087945107681448215}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.22
   m_Center: {x: 0, y: 0.13108169, z: 0}
 --- !u!114 &-7664715938075093768
@@ -255,6 +310,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e230a52e0ec464fb6ff9faba59a217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &602762528265641409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087945107681448215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 649903739
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &-6721675128959813391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +346,9 @@ MonoBehaviour:
   hungerReductionAmount: 50
   pizzaParent: {fileID: 0}
   impactSound: {fileID: 3537466071599834138}
---- !u!114 &7111861328428219336
+  foodOriginalPrefab: {fileID: 0}
+  foodLifetime: 5
+--- !u!114 &8823509108051141818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,9 +357,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 2087945107681448215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb67c077b2fd7d6469de68a1fd29bbc8, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  objectSpeed: 5
-  direction: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &9129218904389032616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087945107681448215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42eaf1a4e88a84049876e5f9a41c11b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10

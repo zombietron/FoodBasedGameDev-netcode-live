@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using Unity.Netcode;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(MeleAttack))]
-public class NavmeshMovement : MonoBehaviour
+public class NavmeshMovement : NetworkBehaviour
 {
+    [SerializeField]
     private NavMeshAgent agent;
 
     [SerializeField]
@@ -20,18 +22,28 @@ public class NavmeshMovement : MonoBehaviour
 
     public UnityEvent<bool> inAttackRange;
     
-    void Awake()
+    public override void OnNetworkSpawn()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent.enabled = true;
         agent.speed = agentSpeed;
         atk = GetComponent<MeleAttack>();
-    }
-
-    private void OnEnable()
-    {
         selectedTarget = SelectTargetPlayer();
         atk.Target = selectedTarget;
+        base.OnNetworkSpawn();
     }
+
+    public override void OnNetworkDespawn()
+    {
+        agent.enabled = false;
+        base.OnNetworkDespawn();
+    }
+
+    /*  removed due to network rewrite, handling in OnNetworkSpawn()
+     *  private void OnEnable()
+        {
+            selectedTarget = SelectTargetPlayer();
+            atk.Target = selectedTarget;
+        }*/
 
     private GameObject SelectTargetPlayer()
     {
@@ -75,6 +87,9 @@ BB&&G7?7!7!7JJ5PBBGBBGGGGGGGGGB#@@@@@@@@@&&&&@&@@&
 
     void Update()
     {
+        if (!IsServer)
+            return;
+
         agent.SetDestination(selectedTarget.transform.position);
         
         if(agent.destination != null) {
