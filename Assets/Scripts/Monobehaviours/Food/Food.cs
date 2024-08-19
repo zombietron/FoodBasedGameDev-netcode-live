@@ -41,12 +41,11 @@ public class Food : NetworkBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (!IsServer)
-            return;
 
         AudioSource.PlayClipAtPoint(impactSound.clip,transform.position);
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            
             collision.gameObject.GetComponent<HP>().ReduceHP(hungerReductionAmount);
 
             ReturnFoodToPool();

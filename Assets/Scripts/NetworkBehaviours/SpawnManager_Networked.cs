@@ -47,8 +47,8 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
     IEnumerator SpawnMonstersWithGap(int gap)
     {
         Debug.Log("SpawnMonstersWithGap Coroutine Started at: " + Time.time);
-
-        while (GameManager.Instance.gameState == GameManager.GameState.gameRunning)
+        Debug.Log("Enemies in Scene: " + enemiesInScene.Count);
+        while (GameManager_Networked.Instance.gameState == GameManager_Networked    .GameState.gameRunning)
         {
 
             if (enemiesInScene.Count < waveMgr.wave.maxEnemiesSpawnedDuringWave && !waveMgr.wave.waveComplete)
@@ -56,6 +56,7 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
                 NetworkObject enemy = SelectEnemyType();
 
                 var spawnedEnemy = NetworkObjectPool.Singleton.GetNetworkObject(enemy.gameObject, spawnPoints[spawnLocationIndex].position, Quaternion.identity);
+                spawnedEnemy.Spawn();
                 enemiesInScene.Add(spawnedEnemy.transform);
                 waveMgr.wave.AddEnemyToWaveCount();
                 spawnLocationIndex = spawnLocationIndex >= spawnPoints.Count - 1 ? 0 : spawnLocationIndex + 1;

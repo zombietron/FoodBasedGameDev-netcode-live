@@ -46,6 +46,7 @@ public class TimerUiNetworked : NetworkBehaviour
         //wMgr.UpdateWaveState(WaveManager.WaveState.running);
         SetTimerVisibilityRpc(false);
         networkTimerComplete.Value = true;
+        GameManager_Networked.Instance.ChangeGameState(GameManager_Networked.GameState.gameRunning);
         yield break;
     }
 

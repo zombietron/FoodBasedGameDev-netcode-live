@@ -21,6 +21,7 @@ public class Wave : MonoBehaviour
 
     public void InitFirstWave()
     {
+        Debug.Log("First Wave Initialization Called");
         enemyCount = 10;
         waveTime = 60;
         waveNum = 1;

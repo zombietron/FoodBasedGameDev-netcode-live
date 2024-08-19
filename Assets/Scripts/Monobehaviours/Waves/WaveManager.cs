@@ -32,6 +32,7 @@ public class WaveManager : MonoBehaviour
     {
         waveState = newState;
         Debug.Log("WaveState changed to " + waveState);
+        Debug.Log($"StartingWave {wave.waveNum}");
         switch (waveState) 
         {
             case WaveState.preWave:
@@ -39,15 +40,17 @@ public class WaveManager : MonoBehaviour
                 if (wave.waveNum == 0)
                 {
                     wave.InitFirstWave();
-                }
+                    changeWaveState(WaveState.running);
+                } 
                 else
-                    wave.ProgressWave();
-                timer.gameObject.SetActive(true);
-                timer.StartTimer(3);
+                     wave.ProgressWave();
+                changeWaveState(WaveState.running);
+                //timer.gameObject.SetActive(true);
+                //timer.StartTimer(3);
                 break;
 
             case WaveState.running:
-                timer.gameObject.SetActive(false);
+                //timer.gameObject.SetActive(false);
                 spawnController.StartMonsterWithGapCoRoutine(spawnController.SpawnGap);
                 break;
 

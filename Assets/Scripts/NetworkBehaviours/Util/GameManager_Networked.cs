@@ -40,15 +40,13 @@ public class GameManager_Networked : NetworkBehaviour
     }
     public override void OnNetworkSpawn()
     {
-        SceneManager.sceneLoaded += OnSceneLoad;
         //for testing while we wait to build our menu scene.
-        OnSceneLoad(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+       // OnSceneLoad(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         base.OnNetworkSpawn();
     }
 
     public override void OnNetworkDespawn()
     {
-        SceneManager.sceneLoaded -= OnSceneLoad;
         base.OnNetworkDespawn();
     }
     public void ChangeGameState(GameState newState)
