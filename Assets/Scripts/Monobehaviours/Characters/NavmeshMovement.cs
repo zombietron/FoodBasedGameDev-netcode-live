@@ -96,7 +96,7 @@ BB&&G7?7!7!7JJ5PBBGBBGGGGGGGGGB#@@@@@@@@@&&&&@&@@&
             if (Vector3.Distance(agent.gameObject.transform.position,agent.destination) <=1f)
             {
                 Debug.Log(Vector3.Distance(agent.gameObject.transform.position, agent.destination));
-                inAttackRange.Invoke(true);
+                // inAttackRange.Invoke(true);
             }
         } 
     }

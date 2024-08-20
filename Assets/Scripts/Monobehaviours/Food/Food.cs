@@ -15,6 +15,7 @@ public class Food : NetworkBehaviour
     [HideInInspector]
     public GameObject foodOriginalPrefab;
 
+    //What is the real shelf life of a hot dog?
     [SerializeField]
     [Range(0f, 15f)]
     private float foodLifetime = 5f;
@@ -41,13 +42,22 @@ public class Food : NetworkBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        // making sure to handle trigger collisions on server
+        if (!IsServer)
+            return;
 
         AudioSource.PlayClipAtPoint(impactSound.clip,transform.position);
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if(collision.gameObject.TryGetComponent<HP>(out var hpComponent))
+            {
+                hpComponent.ReduceHP(hungerReductionAmount);
+            }
+            else
+            {
+                Debug.Log("This collision's HP is null yo!");
+            }
             
-            collision.gameObject.GetComponent<HP>().ReduceHP(hungerReductionAmount);
-
             ReturnFoodToPool();
         }
     }

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class HP : MonoBehaviour
+public class HP : NetworkBehaviour
 {
     [SerializeField]
     private int totalHP;
@@ -25,6 +23,7 @@ public class HP : MonoBehaviour
 
     public void ReduceHP(int damageAmount)
     {
+
         currentHP -= damageAmount;
 
         if (currentHP <= 0)
@@ -88,25 +87,27 @@ public class HP : MonoBehaviour
    
     
     public string GetCurrentHP()
-{
-    return currentHP.ToString();
-}
-private void Dead()
-{
-    if(isEnemy)
     {
-        Instantiate(hitParticleSystemPrefab, transform.position, Quaternion.identity);
-        AudioSource.PlayClipAtPoint(deathSound.clip, transform.position);
-        gameObject.GetComponent<PooledObjectBehaviour>().ReturnToPool();
-
-
+        return currentHP.ToString();
     }
-
-    else
+    private void Dead()
     {
-        Monobehaviours.Characters.PlayerController pc = GetComponent<Monobehaviours.Characters.PlayerController>();
-        pc.isDead = true;
-        GameManager.Instance.ChangeGameState(GameManager.GameState.gameEnding);
+        if (isEnemy)
+        {
+            Instantiate(hitParticleSystemPrefab, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(deathSound.clip, transform.position);
+        }
+    
+        else // we're updating the player
+        {
+            if (!IsOwner) //client
+                return;
+
+            // TODO: update this to run from right POV (from server),
+            //    and handle any server and client specific updates. 
+            Monobehaviours.Characters.PlayerController pc = GetComponent<Monobehaviours.Characters.PlayerController>();
+            pc.isDead = true;
+            GameManager.Instance.ChangeGameState(GameManager.GameState.gameEnding);
+        }
     }
-}
 }

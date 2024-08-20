@@ -297,10 +297,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 127
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2022214269
+  GlobalObjectIdHash: 272093217
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -345,7 +345,7 @@ MonoBehaviour:
   pizzaParent: {fileID: 0}
   impactSound: {fileID: 5789537891989573081}
   foodOriginalPrefab: {fileID: 8959947128519048034}
-  foodLifetimeTime: 5
+  foodLifetime: 5
 --- !u!114 &-5171093494835300005
 MonoBehaviour:
   m_ObjectHideFlags: 0
