@@ -119,6 +119,7 @@ public class HP : NetworkBehaviour
         {
             if (IsServer)
             {
+                SpawnManager_Networked.Instance.RemoveDestroyedEnemy(gameObject.transform);
                 NetworkObject.Despawn(false);
                 NetworkObjectPool.Singleton.ReturnNetworkObject(
                     NetworkObject,

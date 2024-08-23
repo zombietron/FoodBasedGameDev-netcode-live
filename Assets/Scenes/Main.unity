@@ -4479,6 +4479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveMgr: {fileID: 390030124}
   gameState: 0
+  timer: {fileID: 533205061}
 --- !u!1 &533205054
 GameObject:
   m_ObjectHideFlags: 0

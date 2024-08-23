@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
+using UnityEngine.Events;
+using System;
+
 public class GameManager_Networked : NetworkBehaviour
 {
     //setwaves into action
@@ -12,9 +15,11 @@ public class GameManager_Networked : NetworkBehaviour
 
     public WaveManager waveMgr;
 
+    public bool firstRun = true;
     public enum GameState
     {
         menu,
+        timer,
         gameRunning,
         gameEnding,
         pause
@@ -22,9 +27,8 @@ public class GameManager_Networked : NetworkBehaviour
 
     public GameState gameState;
 
-    public delegate void OnGameStateChange(GameState state);
-
-    public OnGameStateChange onGameStateChange;
+    [SerializeField]
+    TimerUiNetworked timer;
 
     void Awake()
     {
@@ -40,13 +44,18 @@ public class GameManager_Networked : NetworkBehaviour
     }
     public override void OnNetworkSpawn()
     {
+        if (!IsServer) return;
+
+        NetworkManager.OnServerStarted += StartWave;
         //for testing while we wait to build our menu scene.
-       // OnSceneLoad(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+        // OnSceneLoad(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+        //StartWave();
         base.OnNetworkSpawn();
     }
 
     public override void OnNetworkDespawn()
     {
+        NetworkManager.OnServerStarted -= StartWave;
         base.OnNetworkDespawn();
     }
     public void ChangeGameState(GameState newState)
@@ -57,6 +66,13 @@ public class GameManager_Networked : NetworkBehaviour
         {
             case GameState.menu:
                 //do menu stuff
+                break;
+
+            case GameState.timer:
+                if(!firstRun)
+                    EnableCountDownTimerRpc();
+                timer.StartCountdown(3);
+                firstRun = false;
                 break;
 
             case GameState.gameRunning:
@@ -92,7 +108,8 @@ public class GameManager_Networked : NetworkBehaviour
         Debug.Log("Paused");
     }
     
-    public void OnSceneLoad(Scene scene, LoadSceneMode mode)
+
+/*    public void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
         if (!IsServer)
             return;
@@ -104,5 +121,17 @@ public class GameManager_Networked : NetworkBehaviour
         {
             ChangeGameState(GameState.gameRunning);
         }
+    }*/
+
+    public void StartWave()
+    {
+        ChangeGameState(GameState.timer);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void EnableCountDownTimerRpc()
+    {
+        timer.gameObject.SetActive(true);
+       
     }
 }

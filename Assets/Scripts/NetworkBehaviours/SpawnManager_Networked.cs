@@ -125,7 +125,7 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
         score++;
         if (enemiesInScene.Count == 0)
         {
-            WaveManager.changeWaveState(WaveManager.WaveState.preWave);
+            GameManager_Networked.Instance.ChangeGameState(GameManager_Networked.GameState.timer);
         }
     }
 

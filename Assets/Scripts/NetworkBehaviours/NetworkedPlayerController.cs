@@ -103,7 +103,7 @@ public class NetworkedPlayerController : NetworkBehaviour
     //when the throw action is activated (spacebar pressed)
     public void OnThrow()
     {
-
+        
         if (IsOwner && IsClient &&  projectiles[projectileIndex].ammoAmount>0)
         {
             projectiles[projectileIndex].ammoAmount--;

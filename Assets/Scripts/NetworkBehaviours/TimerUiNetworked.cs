@@ -20,21 +20,24 @@ public class TimerUiNetworked : NetworkBehaviour
             return;
         }
 
-        if(IsServer && !networkTimerComplete.Value)
+/*        if(IsServer && !networkTimerComplete.Value)
         {
             StartCoroutine(StartTimer(timerLength));
-        }
+        }*/
         base.OnNetworkSpawn();
 
         
     }
 
-
+    public void StartCountdown(int length)
+    {
+        StartCoroutine(StartTimer(length));
+    }
 
     public IEnumerator StartTimer(int length)
     {
         networkTimerVariable.Value = length;
-
+        networkTimerComplete.Value = false;
         while (networkTimerVariable.Value >= 0)
         {
             SetTimerTextRpc(networkTimerVariable.Value);

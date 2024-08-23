@@ -40,18 +40,17 @@ public class WaveManager : MonoBehaviour
                 if (wave.waveNum == 0)
                 {
                     wave.InitFirstWave();
+
                     changeWaveState(WaveState.running);
                 } 
                 else
                      wave.ProgressWave();
                 
                 changeWaveState(WaveState.running);
-                //timer.gameObject.SetActive(true);
-                //timer.StartTimer(3);
+
                 break;
 
             case WaveState.running:
-                //timer.gameObject.SetActive(false);
                 spawnController.StartMonsterWithGapCoRoutine(spawnController.SpawnGap);
                 break;
 
