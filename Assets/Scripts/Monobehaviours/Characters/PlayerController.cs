@@ -77,7 +77,7 @@ namespace Monobehaviours.Characters
             stallBehavior.Inventory = characterAmmoInventory;
             //activeFoodTypeToThrow = stallBehavior.GetTableAmmoType().GetFoodType().ToString();
             isInteractable = true;
-            stallBehavior.Player = this;
+            //stallBehavior.Player = this;
         }
 
         private void OnTriggerExit(Collider other)

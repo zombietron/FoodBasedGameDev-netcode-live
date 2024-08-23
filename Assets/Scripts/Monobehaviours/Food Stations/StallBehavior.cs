@@ -24,9 +24,9 @@ public class StallBehavior : MonoBehaviour
 
     [SerializeField] private AmmoInventory inventory;
 
-    [SerializeField] PlayerController player;
+    [SerializeField] NetworkedPlayerController player;
 
-    public PlayerController Player
+    public NetworkedPlayerController Player
     {
         get { return player; }
         set { player = value; }
@@ -101,8 +101,10 @@ public class StallBehavior : MonoBehaviour
         }
         Debug.Log("Ammo Collected!");
         fillRing.color = Color.green;
-        inventory.UpdateAmmoInventory(tableAmmoType, tableAmmoType.MaxAmmoAmt());
-        player.SetAmmoIndex(ammoIndex);
+        //inventory.UpdateAmmoInventory(tableAmmoType, tableAmmoType.MaxAmmoAmt());
+        player.SetProjectile(ammoIndex);
+        player.ReloadCurrentProjectile();
+        Debug.Log("Player AMMO RELOADED: ");
         StartCoroutine(CoolDown());
     }
 

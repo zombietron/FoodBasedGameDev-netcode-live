@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Monobehaviours.Characters;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HUDController : MonoBehaviour
+public class HUDController : SingletonPersistent<HUDController>
 {
     [SerializeField] private TextMeshProUGUI currentPlayerHP;
-    [SerializeField] private TextMeshProUGUI activeFoodType;
+    [SerializeField] private Sprite activeFoodType;
     [SerializeField] private TextMeshProUGUI activeAmmoCount;
     [SerializeField] private TextMeshProUGUI activeWaveCount;
     [SerializeField] private TextMeshProUGUI currentScore;
@@ -16,27 +17,30 @@ public class HUDController : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private GameObject spawnManager;
     private HP playerHealth;
-    private PlayerController playerController;
-    private AmmoInventory ammoInventory;
+    private NetworkedPlayerController playerController;
     private Wave wave;
-    private SpawnController spawnController;
+    private SpawnManager_Networked spawnController;
     void Awake()
     {
-        playerHealth = player.GetComponent<HP>();
-        playerController = player.GetComponent<PlayerController>();
-        ammoInventory = player.GetComponent<AmmoInventory>();
         wave = waveManager.GetComponent<Wave>();
-        spawnController = spawnManager.GetComponent<SpawnController>();
+        spawnController = spawnManager.GetComponent<SpawnManager_Networked>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentPlayerHP.text = playerHealth.GetCurrentHP();
-        activeFoodType.text = playerController.GetActiveFoodTypeToThrow();
-        activeAmmoCount.text = ammoInventory.GetCurrentAmmoCount(activeFoodType.text);
-        activeWaveCount.text = wave.GetWaveCount();
-        currentScore.text = spawnController.GetScore();
+        //currentPlayerHP.text = playerHealth.GetCurrentHP();
+        //activeWaveCount.text = wave.GetWaveCount();
+        //currentScore.text = spawnController.GetScore();
+    }
+
+    public void UpdateFoodIcon(Sprite ico)
+    {
+        activeFoodType = ico;
+    }
+    public void UpdateFoodAmt(int amt)
+    {
+        activeAmmoCount.text = amt.ToString();
     }
 }

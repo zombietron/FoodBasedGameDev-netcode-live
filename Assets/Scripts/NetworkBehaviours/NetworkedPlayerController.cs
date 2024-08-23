@@ -1,7 +1,9 @@
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(AttackData))]
 public class NetworkedPlayerController : NetworkBehaviour
 {
     private FoodBasedGameDevPlayerActions pActions;
@@ -9,7 +11,7 @@ public class NetworkedPlayerController : NetworkBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] Transform spawnTransform;
     [SerializeField] GameObject hotDogPrefab;
-
+    
     Vector3 finalMove = Vector3.zero;
 
     PlayerInput playerInput;
@@ -17,13 +19,27 @@ public class NetworkedPlayerController : NetworkBehaviour
     Animator anim;
     //OWNERSHIP means WHO IS SIMULATING THIS OBJECT (moving, rotating, etc). 
 
+    //Attack information
+    List<ProjectileInfo> projectiles;
+    int projectileIndex;
 
+    public int ProjectileIndex
+    {
+        set { projectileIndex = value; }
+        get { return projectileIndex; }
+    }
+
+    //ammo stall reload informatoin
+    bool isInteractable;
+    StallBehavior stallBehavior;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
         pActions = new FoodBasedGameDevPlayerActions();
         pActions.Enable();
+        projectiles = GetComponent<AttackData>().PROJECTILES;
+        //TODO: Initialize UI elements (projectile Icon, ammo ammount display)
     }
 
     // Update is called once per frame
@@ -53,6 +69,7 @@ public class NetworkedPlayerController : NetworkBehaviour
             if (IsOwner)
             {
                 playerInput.enabled = true;
+                SetProjectile(0);
             }
             else
                 playerInput.enabled = false;
@@ -87,24 +104,80 @@ public class NetworkedPlayerController : NetworkBehaviour
     //when the throw action is activated (spacebar pressed)
     public void OnThrow()
     {
-        if (IsOwner && IsClient)
+
+        if (IsOwner && IsClient &&  projectiles[projectileIndex].ammoAmount>0)
         {
+            projectiles[projectileIndex].ammoAmount--;
             ThrowHotDogRpc();
         }
     }
 
+    public void OnToggle()
+    {
+        if(IsOwner && IsClient)
+        {
+            projectileIndex = projectileIndex < projectiles.Count - 1 ? projectileIndex + 1 : 0;
+            SetProjectile(projectileIndex);
+
+        }
+    }
+
+    public void SetProjectile(int pIndex)
+    {
+        projectileIndex = pIndex;
+        //HUDController.Instance.UpdateFoodAmt(projectiles[projectileIndex].ammoAmount);
+        //HUDController.Instance.UpdateFoodIcon(projectiles[projectileIndex].icon);
+    }
+
+    public void OnInteract(InputValue value)
+    {
+        if (!isInteractable) return;
+        stallBehavior.StartAmmoPickupCycle(value.isPressed);
+        // trigger pick up animation?
+    }
+
+    public void ReloadCurrentProjectile()
+    {
+        projectiles[ProjectileIndex].RefillAmmo();
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("foodStall") || !IsOwner) return;
+        stallBehavior = other.gameObject.GetComponent<StallBehavior>();
+        stallBehavior.DisplayUseInstructions(true);
+        isInteractable = true;
+        stallBehavior.Player = this;
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.CompareTag("foodStall") || !IsOwner) return;
+
+        isInteractable = false;
+        stallBehavior.DisplayUseInstructions(false);
+    }
     //send request to server to instantiate the hotdog and spawn at the correct position
     [Rpc(SendTo.Server)]
     public void ThrowHotDogRpc()
     {
-        var spawnedHotDog = NetworkObjectPool.Singleton.GetNetworkObject(
-            hotDogPrefab,
+        var spawnedProjectile = NetworkObjectPool.Singleton.GetNetworkObject(
+            projectiles[projectileIndex].projectilePrefab,
             spawnTransform.position,
             spawnTransform.rotation);
 
-        spawnedHotDog.GetComponent<Food>().foodOriginalPrefab = hotDogPrefab;
-        spawnedHotDog.Spawn();
+        spawnedProjectile.GetComponent<Food>().foodOriginalPrefab = projectiles[projectileIndex].projectilePrefab;
+        spawnedProjectile.Spawn();
 
-        Debug.Log("I THREW A HOTDOG!");
+        Debug.Log($"I THREW A {spawnedProjectile.name}");
+    }
+
+    public Sprite GetActiveFoodTypeToThrow()
+    {
+        return projectiles[projectileIndex].icon;
+    }
+
+    public int GetCurrentAmmoCount()
+    {
+        return projectiles[projectileIndex].ammoAmount;
     }
 }

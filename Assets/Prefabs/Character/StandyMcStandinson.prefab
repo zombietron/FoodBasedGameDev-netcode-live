@@ -142,16 +142,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8103841882583609639}
+  - component: {fileID: -3651065450782251543}
   - component: {fileID: 5799860642196894193}
   - component: {fileID: 3834543485832097549}
   - component: {fileID: 337512928}
   - component: {fileID: 337512926}
   - component: {fileID: 4372093541335875541}
-  - component: {fileID: -3651065450782251543}
   - component: {fileID: 3000375570693733981}
   - component: {fileID: 8147555764529582691}
   - component: {fileID: 1974883890385902036}
   - component: {fileID: 6535350891591156714}
+  - component: {fileID: 3882578524742144331}
   m_Layer: 3
   m_Name: StandyMcStandinson
   m_TagString: Player
@@ -177,6 +178,27 @@ Transform:
   - {fileID: 983523808418649308}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3651065450782251543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5359069404705864245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 586892325
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &5799860642196894193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,27 +368,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnPoint: {fileID: 110650814}
---- !u!114 &-3651065450782251543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359069404705864245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 586892325
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &3000375570693733981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +440,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: {fileID: 8542304748867742455}
+--- !u!114 &3882578524742144331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5359069404705864245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16cf57fefd97f140b96d45d09148e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectiles:
+  - projectilePrefab: {fileID: 8959947128519048034, guid: b7681bf94c8997e44ab7bddea3d74f76,
+      type: 3}
+    ammoAmount: 10
+    maxAmmoAmount: 10
+    icon: {fileID: 21300000, guid: 73aa40a177fd5844b858a516dc9eb620, type: 3}
+  - projectilePrefab: {fileID: 1466558162866578227, guid: cc7ab87c8c9c5e34c8dafa8d555c6ba4,
+      type: 3}
+    ammoAmount: 10
+    maxAmmoAmount: 10
+    icon: {fileID: 21300000, guid: a117477a64e20144fa35628fb30fb85f, type: 3}
+  - projectilePrefab: {fileID: 5370329103413764276, guid: 69c2b0700432a5248bd355ffd77f2559,
+      type: 3}
+    ammoAmount: 10
+    maxAmmoAmount: 10
+    icon: {fileID: 21300000, guid: 7d896b9ea447ea94ca205ef865b95117, type: 3}
+  - projectilePrefab: {fileID: 2087945107681448215, guid: a83c46ccea5c4b340ac2e0103c575a6c,
+      type: 3}
+    ammoAmount: 20
+    maxAmmoAmount: 20
+    icon: {fileID: 21300000, guid: 1f7ae6769ae7afd44a099377f45a000b, type: 3}
 --- !u!1 &8571936849300920538
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b99bce6953f754caae3c1c15ac6039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constraint: {fileID: 0}
 --- !u!1001 &1190139735639372392
 PrefabInstance:
   m_ObjectHideFlags: 0

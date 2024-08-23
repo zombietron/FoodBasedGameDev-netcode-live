@@ -233,6 +233,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -1650943816851499429}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9c71a6aabef46c8419ee5a2cdc45aa84,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 752417261123346638}
   m_SourcePrefab: {fileID: 100100000, guid: 9c71a6aabef46c8419ee5a2cdc45aa84, type: 3}
 --- !u!1 &1466558162866578227 stripped
 GameObject:
@@ -369,6 +373,19 @@ MonoBehaviour:
   impactSound: {fileID: 1880104850873079564}
   foodOriginalPrefab: {fileID: 0}
   foodLifetime: 5
+--- !u!114 &752417261123346638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466558162866578227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42eaf1a4e88a84049876e5f9a41c11b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
 --- !u!4 &2238731351852120457 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c71a6aabef46c8419ee5a2cdc45aa84,
