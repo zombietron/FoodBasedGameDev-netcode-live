@@ -10,7 +10,6 @@ public class NetworkedPlayerController : NetworkBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] Transform spawnTransform;
-    [SerializeField] GameObject hotDogPrefab;
     
     Vector3 finalMove = Vector3.zero;
 
@@ -22,18 +21,18 @@ public class NetworkedPlayerController : NetworkBehaviour
     //Attack information
     List<ProjectileInfo> projectiles;
     int projectileIndex;
-
+ 
     public int ProjectileIndex
     {
         set { projectileIndex = value; }
         get { return projectileIndex; }
     }
 
-    //ammo stall reload informatoin
+    //ammo stall reload information
     bool isInteractable;
     StallBehavior stallBehavior;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         pActions = new FoodBasedGameDevPlayerActions();
@@ -108,6 +107,7 @@ public class NetworkedPlayerController : NetworkBehaviour
         if (IsOwner && IsClient &&  projectiles[projectileIndex].ammoAmount>0)
         {
             projectiles[projectileIndex].ammoAmount--;
+            HUDController.Instance.UpdateFoodAmt(projectiles[projectileIndex].ammoAmount);
             ThrowHotDogRpc();
         }
     }
@@ -125,8 +125,9 @@ public class NetworkedPlayerController : NetworkBehaviour
     public void SetProjectile(int pIndex)
     {
         projectileIndex = pIndex;
-        //HUDController.Instance.UpdateFoodAmt(projectiles[projectileIndex].ammoAmount);
-        //HUDController.Instance.UpdateFoodIcon(projectiles[projectileIndex].icon);
+        HUDController.Instance.UpdateFoodAmt(projectiles[projectileIndex].ammoAmount);
+        HUDController.Instance.UpdateFoodIcon(projectiles[projectileIndex].icon);
+
     }
 
     public void OnInteract(InputValue value)
@@ -136,10 +137,6 @@ public class NetworkedPlayerController : NetworkBehaviour
         // trigger pick up animation?
     }
 
-    public void ReloadCurrentProjectile()
-    {
-        projectiles[ProjectileIndex].RefillAmmo();
-    }
     public void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("foodStall") || !IsOwner) return;
@@ -170,7 +167,11 @@ public class NetworkedPlayerController : NetworkBehaviour
 
         Debug.Log($"I THREW A {spawnedProjectile.name}");
     }
-
+    public void ReloadCurrentProjectile()
+    {
+        projectiles[ProjectileIndex].RefillAmmo();
+        HUDController.Instance.UpdateFoodAmt(projectiles[ProjectileIndex].ammoAmount);
+    }
     public Sprite GetActiveFoodTypeToThrow()
     {
         return projectiles[projectileIndex].icon;

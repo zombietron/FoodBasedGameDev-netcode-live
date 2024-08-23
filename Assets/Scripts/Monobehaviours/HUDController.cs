@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Monobehaviours.Characters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +7,7 @@ using UnityEngine.UI;
 public class HUDController : SingletonPersistent<HUDController>
 {
     [SerializeField] private TextMeshProUGUI currentPlayerHP;
-    [SerializeField] private Sprite activeFoodType;
+    [SerializeField] private Image activeFoodType;
     [SerializeField] private TextMeshProUGUI activeAmmoCount;
     [SerializeField] private TextMeshProUGUI activeWaveCount;
     [SerializeField] private TextMeshProUGUI currentScore;
@@ -20,11 +19,12 @@ public class HUDController : SingletonPersistent<HUDController>
     private NetworkedPlayerController playerController;
     private Wave wave;
     private SpawnManager_Networked spawnController;
-    void Awake()
+
+    public override void Awake()
     {
         wave = waveManager.GetComponent<Wave>();
         spawnController = spawnManager.GetComponent<SpawnManager_Networked>();
-
+        base.Awake();
     }
 
     // Update is called once per frame
@@ -35,9 +35,14 @@ public class HUDController : SingletonPersistent<HUDController>
         //currentScore.text = spawnController.GetScore();
     }
 
+
+    public void PrintMessage(string msg)
+    {
+        Debug.Log("${msg } printed from HUDController Singleton");
+    }
     public void UpdateFoodIcon(Sprite ico)
     {
-        activeFoodType = ico;
+        activeFoodType.sprite = ico;
     }
     public void UpdateFoodAmt(int amt)
     {

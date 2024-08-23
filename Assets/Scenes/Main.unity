@@ -8311,7 +8311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlayerHP: {fileID: 1842721717}
-  activeFoodType: {fileID: 0}
+  activeFoodType: {fileID: 913478736}
   activeAmmoCount: {fileID: 348330792}
   activeWaveCount: {fileID: 1286770728}
   currentScore: {fileID: 681442592}

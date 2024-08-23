@@ -44,6 +44,7 @@ public class WaveManager : MonoBehaviour
                 } 
                 else
                      wave.ProgressWave();
+                
                 changeWaveState(WaveState.running);
                 //timer.gameObject.SetActive(true);
                 //timer.StartTimer(3);
