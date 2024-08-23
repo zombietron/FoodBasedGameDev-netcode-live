@@ -108,7 +108,7 @@ public class NetworkedPlayerController : NetworkBehaviour
         {
             projectiles[projectileIndex].ammoAmount--;
             HUDController.Instance.UpdateFoodAmt(projectiles[projectileIndex].ammoAmount);
-            ThrowProjectileRpc(projectileIndex);
+            ThrowProjectileRpc(projectileIndex, spawnTransform.position, transform.rotation);
         }
     }
 
@@ -155,11 +155,11 @@ public class NetworkedPlayerController : NetworkBehaviour
     }
     //send request to server to instantiate the hotdog and spawn at the correct position
     [Rpc(SendTo.Server)]
-    public void ThrowProjectileRpc(int key)
+    public void ThrowProjectileRpc(int key, Vector3 pos,Quaternion rot)
     {
         var spawnedProjectile = NetworkObjectPool.Singleton.GetNetworkObject(projectiles[key].projectilePrefab,
-            spawnTransform.position,
-            spawnTransform.rotation);
+            pos,
+            rot);
 
         spawnedProjectile.GetComponent<Food>().foodOriginalPrefab = projectiles[projectileIndex].projectilePrefab;
         spawnedProjectile.Spawn();

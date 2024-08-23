@@ -119,9 +119,11 @@ public class HP : NetworkBehaviour
         {
             if (IsServer)
             {
+                NetworkObject.Despawn(false);
                 NetworkObjectPool.Singleton.ReturnNetworkObject(
                     NetworkObject,
                     originalPrefabKey);
+                
             }
 
             Instantiate(hitParticleSystemPrefab, transform.position, Quaternion.identity);
