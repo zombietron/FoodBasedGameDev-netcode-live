@@ -1411,12 +1411,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1009910873593459530}
   - component: {fileID: 4671445247542485421}
+  - component: {fileID: 8876669130185371869}
   - component: {fileID: 7477496705243261773}
   - component: {fileID: 6318142602493005377}
-  - component: {fileID: 8876669130185371869}
   - component: {fileID: 2408234425977131751}
   - component: {fileID: 6279280245955631922}
   - component: {fileID: 8125825953415936893}
+  - component: {fileID: 5004564801566377349}
   m_Layer: 7
   m_Name: SkeletonEnemy-Networked
   m_TagString: Enemy
@@ -1465,6 +1466,27 @@ CapsuleCollider:
   m_Height: 1.6293877
   m_Direction: 1
   m_Center: {x: -0.007933438, y: 0.8065682, z: -0.026444852}
+--- !u!114 &8876669130185371869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079444773405177413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 841903034
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &7477496705243261773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,27 +1518,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValue: 20
---- !u!114 &8876669130185371869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8079444773405177413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 841903034
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &2408234425977131751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,6 +1601,19 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &5004564801566377349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079444773405177413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f8e6db101d664448e532a8887e84ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalPrefabKey: {fileID: 0}
 --- !u!1 &8428791101239988969
 GameObject:
   m_ObjectHideFlags: 0

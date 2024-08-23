@@ -15,7 +15,7 @@ public class Food : NetworkBehaviour
     [HideInInspector]
     public GameObject foodOriginalPrefab;
 
-    //What is the real shelf life of a hot dog?
+    // What is the real shelf life of a hot dog?
     [SerializeField]
     [Range(0f, 15f)]
     private float foodLifetime = 5f;
@@ -66,6 +66,8 @@ public class Food : NetworkBehaviour
     {
         NetworkObject.Despawn(false);
 
-        NetworkObjectPool.Singleton.ReturnNetworkObject(NetworkObject, foodOriginalPrefab);
+        NetworkObjectPool.Singleton.ReturnNetworkObject(
+            NetworkObject,
+            foodOriginalPrefab);
     }
 }
