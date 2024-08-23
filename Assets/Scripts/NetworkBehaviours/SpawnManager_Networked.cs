@@ -53,11 +53,6 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
 
                 spawnedEnemy.Spawn();
 
-                var enemyCollisionHandler =
-                    spawnedEnemy.gameObject.GetComponent<NetworkEnemyCollision>();
-
-                enemyCollisionHandler.originalPrefabKey = enemy.gameObject;
-
                 enemiesInScene.Add(spawnedEnemy.transform);
                 waveMgr.wave.AddEnemyToWaveCount();
 

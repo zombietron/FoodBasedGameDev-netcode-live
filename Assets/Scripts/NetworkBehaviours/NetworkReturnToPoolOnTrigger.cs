@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 
 [DisallowMultipleComponent]
-public class NetworkEnemyCollision : NetworkBehaviour
+public class NetworkReturnToPoolOnTrigger : NetworkBehaviour
 {
     [HideInInspector]
     public GameObject originalPrefabKey;

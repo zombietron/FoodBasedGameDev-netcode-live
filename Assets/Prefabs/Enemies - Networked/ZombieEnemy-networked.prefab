@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: -4620866879267322835}
   - component: {fileID: -1037440569395688945}
   - component: {fileID: -1636693943029233664}
-  - component: {fileID: -2332911107363941351}
   m_Layer: 7
   m_Name: ZombieEnemy-networked
   m_TagString: Enemy
@@ -229,7 +228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalHP: 20
-  currentHP: 0
   isEnemy: 1
   hitParticleSystemPrefab: {fileID: 7937853189272395400, guid: 53a481daa0500da4db8ff0a3af1e0a7f,
     type: 3}
@@ -369,19 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-2332911107363941351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6332301642665068665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f8e6db101d664448e532a8887e84ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalPrefabKey: {fileID: 6332301642665068665}
 --- !u!1 &8468976036655466886
 GameObject:
   m_ObjectHideFlags: 0
