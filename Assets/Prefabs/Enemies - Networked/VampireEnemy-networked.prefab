@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 6425738081608389135}
   - component: {fileID: 8805536475468638111}
   - component: {fileID: 8305445454763911015}
-  - component: {fileID: -8697016076863188135}
+  - component: {fileID: 4342981496432943908}
   m_Layer: 7
   m_Name: VampireEnemy-networked
   m_TagString: Enemy
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-8697016076863188135
+--- !u!114 &4342981496432943908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

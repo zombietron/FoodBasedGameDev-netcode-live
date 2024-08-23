@@ -1417,7 +1417,7 @@ GameObject:
   - component: {fileID: 2408234425977131751}
   - component: {fileID: 6279280245955631922}
   - component: {fileID: 8125825953415936893}
-  - component: {fileID: -3269143936182853513}
+  - component: {fileID: 5004564801566377349}
   m_Layer: 7
   m_Name: SkeletonEnemy-Networked
   m_TagString: Enemy
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-3269143936182853513
+--- !u!114 &5004564801566377349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

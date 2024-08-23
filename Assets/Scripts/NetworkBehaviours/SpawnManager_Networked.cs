@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using Unity.Netcode;
 
 public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
@@ -17,13 +16,10 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
 
     public List<NetworkObject> enemyPools;
 
-    [SerializeField] List<Transform> spawnPoints;
+    [SerializeField] List<Transform> spawnPoints = new();
     [SerializeField] WaveManager waveMgr;
-    [SerializeField] List<Transform> enemiesInScene;
-    public List<Transform> EnemiesInScene
-    {
-        get { return enemiesInScene; }
-    }
+    [SerializeField] List<Transform> enemiesInScene = new();
+    public List<Transform> EnemiesInScene => enemiesInScene;
 
 
     //bool waveComplete = false;
@@ -38,23 +34,23 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
      * tells the SpawnController how many and where
     */
 
-    private void Awake()
-    {
-        enemiesInScene = new List<Transform>();
-    }
-
-
     IEnumerator SpawnMonstersWithGap(int gap)
     {
         Debug.Log("SpawnMonstersWithGap Coroutine Started at: " + Time.time);
         Debug.Log("Enemies in Scene: " + enemiesInScene.Count);
+
         while (GameManager_Networked.Instance.gameState == GameManager_Networked.GameState.gameRunning)
         {
-            if (enemiesInScene.Count < waveMgr.wave.maxEnemiesSpawnedDuringWave && !waveMgr.wave.waveComplete)
+            if (enemiesInScene.Count < waveMgr.wave.maxEnemiesSpawnedDuringWave && 
+                !waveMgr.wave.waveComplete)
             {
                 NetworkObject enemy = SelectEnemyType();
 
-                var spawnedEnemy = NetworkObjectPool.Singleton.GetNetworkObject(enemy.gameObject, spawnPoints[spawnLocationIndex].position, Quaternion.identity);
+                var spawnedEnemy = NetworkObjectPool.Singleton.GetNetworkObject(
+                    enemy.gameObject,
+                    spawnPoints[spawnLocationIndex].position,
+                    Quaternion.identity);
+
                 spawnedEnemy.Spawn();
 
                 var enemyCollisionHandler =
@@ -64,13 +60,17 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
 
                 enemiesInScene.Add(spawnedEnemy.transform);
                 waveMgr.wave.AddEnemyToWaveCount();
-                spawnLocationIndex = spawnLocationIndex >= spawnPoints.Count - 1 ? 0 : spawnLocationIndex + 1;
+
+                spawnLocationIndex = 
+                    spawnLocationIndex >= spawnPoints.Count - 1 ?
+                        0 : spawnLocationIndex + 1;
 
                 //spawnedEnemy.transform.parent = spawnedEnemies.transform;
                 yield return new WaitForSeconds(gap);
             }
             else
-                yield return new WaitUntil(() => enemiesInScene.Count < waveMgr.wave.maxEnemiesSpawnedDuringWave);
+                yield return new WaitUntil(
+                    () => enemiesInScene.Count < waveMgr.wave.maxEnemiesSpawnedDuringWave);
 
 
         }

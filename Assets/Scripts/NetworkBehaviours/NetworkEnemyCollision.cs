@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 
+[DisallowMultipleComponent]
 public class NetworkEnemyCollision : NetworkBehaviour
 {
     [HideInInspector]
