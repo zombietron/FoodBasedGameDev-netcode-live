@@ -15,7 +15,10 @@ public class HP : NetworkBehaviour
     private GameObject hitParticleSystemPrefab;
 
     [SerializeField]
-    AudioSource deathSound;
+    private AudioSource deathSound;
+
+    [HideInInspector]
+    public GameObject originalPrefabKey;
 
     public override void OnNetworkSpawn()
     {
@@ -103,13 +106,24 @@ public class HP : NetworkBehaviour
 
     private void OnCurrentHealthValueChanged(int previous, int current)
     {
-        // DO Stuff...
+        // if server...
+            // DO Stuff...
+
+        // if client...
+            // DO Stuff...
     }
 
     private void Dead()
     {
         if (isEnemy)
         {
+            if (IsServer)
+            {
+                NetworkObjectPool.Singleton.ReturnNetworkObject(
+                    NetworkObject,
+                    originalPrefabKey);
+            }
+
             Instantiate(hitParticleSystemPrefab, transform.position, Quaternion.identity);
             AudioSource.PlayClipAtPoint(deathSound.clip, transform.position);
         }

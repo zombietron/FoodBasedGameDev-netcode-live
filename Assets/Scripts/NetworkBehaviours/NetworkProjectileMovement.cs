@@ -1,24 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
 public class NetworkProjectileMovement : NetworkBehaviour
 {
     [SerializeField]
-    float moveSpeed=10f;
+    private float moveSpeed = 10f;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(IsOwner)
-        {
-            MoveProjectileForwardAtSpeed();
-        }
+        if (!IsOwner)
+            return;
+
+        MoveProjectileForwardAtSpeed();
     }
 
     public void MoveProjectileForwardAtSpeed()
     {
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * (moveSpeed * Time.deltaTime));
     }
 }
