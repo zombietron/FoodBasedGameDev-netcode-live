@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 [RequireComponent(typeof(Wave))]
 public class WaveManager : MonoBehaviour
 {
@@ -37,7 +36,7 @@ public class WaveManager : MonoBehaviour
         {
             case WaveState.preWave:
                 spawnController.StopSpawning();
-                if (wave.waveNum == 0)
+                if (wave.waveNum.Value == 0)
                 {
                     wave.InitFirstWave();
 

@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Unity.Netcode;
 [RequireComponent(typeof(WaveManager))]
-public class Wave : MonoBehaviour
+public class Wave : NetworkBehaviour
 {
 
     [Tooltip("Use these to initialize your first wave")]
 
     public int enemyCount { private set; get; }
     public float waveTime { private set; get; }
-    public int waveNum { private set; get; }
+    public NetworkVariable<int> waveNum = new NetworkVariable<int>();
     public int maxEnemiesSpawnedDuringWave { private set; get; }
     public int enemiesSpawnedDuringWave { private set; get; }
     public bool waveComplete { private set; get; }
@@ -24,7 +24,7 @@ public class Wave : MonoBehaviour
         Debug.Log("First Wave Initialization Called");
         enemyCount = 10;
         waveTime = 60;
-        waveNum = 1;
+        waveNum.Value = 1;
         maxEnemiesSpawnedDuringWave = 4;
         waveComplete = false;
     }
@@ -32,11 +32,11 @@ public class Wave : MonoBehaviour
     public void ProgressWave()
     {
         enemyCount += 5;
-        waveNum++;
+        waveNum.Value++;
         maxEnemiesSpawnedDuringWave += 4;
         enemiesSpawnedDuringWave = 0;
         waveComplete = false;
-        if(waveNum%3 == 0)
+        if(waveNum.Value%3 == 0)
         {
             waveTime += 30; 
         }
@@ -54,12 +54,12 @@ public class Wave : MonoBehaviour
 
     public string GetWaveCount()
     {
-        return waveNum.ToString();
+        return waveNum.Value.ToString();
     }
 
     public void ResetWaveCount()
     {
-        waveNum = 0;
+        waveNum.Value = 0;
     }
 
     

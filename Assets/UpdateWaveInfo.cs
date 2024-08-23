@@ -11,7 +11,7 @@ public class UpdateWaveInfo : MonoBehaviour
 
     private void OnEnable()
     {
-        waveTitleText.text = "Wave " + wave.wave.waveNum.ToString();
+        waveTitleText.text = "Wave " + wave.wave.waveNum.Value.ToString();
     }
 
     // Update is called once per frame

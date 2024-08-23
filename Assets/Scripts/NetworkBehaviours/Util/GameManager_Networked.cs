@@ -69,8 +69,9 @@ public class GameManager_Networked : NetworkBehaviour
                 break;
 
             case GameState.timer:
-                if(!firstRun)
+                if (!firstRun)
                     EnableCountDownTimerRpc();
+
                 timer.StartCountdown(3);
                 firstRun = false;
                 break;
