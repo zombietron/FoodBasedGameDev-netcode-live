@@ -6,27 +6,41 @@ public class HP : NetworkBehaviour
     [SerializeField]
     private int totalHP;
 
-    [SerializeField]
-    private int currentHP;
+    private readonly NetworkVariable<int> currentHP = new();
 
-    public bool isEnemy;
+    [SerializeField]
+    private bool isEnemy;
 
     [SerializeField]
     private GameObject hitParticleSystemPrefab;
 
-    [SerializeField] AudioSource deathSound;
+    [SerializeField]
+    private AudioSource deathSound;
 
-    void OnEnable()
+    [HideInInspector]
+    public GameObject originalPrefabKey;
+
+    public override void OnNetworkSpawn()
     {
-        currentHP = totalHP;
+        base.OnNetworkSpawn();
+
+        currentHP.Value = totalHP;
+
+        currentHP.OnValueChanged += OnCurrentHealthValueChanged;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        currentHP.OnValueChanged -= OnCurrentHealthValueChanged;
+
+        base.OnNetworkDespawn();
     }
 
     public void ReduceHP(int damageAmount)
     {
+        currentHP.Value -= damageAmount;
 
-        currentHP -= damageAmount;
-
-        if (currentHP <= 0)
+        if (currentHP.Value <= 0)
         {
             Dead();
         }
@@ -84,16 +98,32 @@ public class HP : NetworkBehaviour
      * \
      */
     #endregion
-   
-    
+
     public string GetCurrentHP()
     {
-        return currentHP.ToString();
+        return currentHP.Value.ToString();
     }
+
+    private void OnCurrentHealthValueChanged(int previous, int current)
+    {
+        // if server...
+            // DO Stuff...
+
+        // if client...
+            // DO Stuff...
+    }
+
     private void Dead()
     {
         if (isEnemy)
         {
+            if (IsServer)
+            {
+                NetworkObjectPool.Singleton.ReturnNetworkObject(
+                    NetworkObject,
+                    originalPrefabKey);
+            }
+
             Instantiate(hitParticleSystemPrefab, transform.position, Quaternion.identity);
             AudioSource.PlayClipAtPoint(deathSound.clip, transform.position);
         }

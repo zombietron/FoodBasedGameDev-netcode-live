@@ -79,7 +79,7 @@ public class NetworkedPlayerController : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        if(playerInput !=null)
+        if(playerInput != null)
         {
             playerInput.enabled = false;
         }

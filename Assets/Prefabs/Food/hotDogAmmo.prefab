@@ -246,7 +246,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ca9a42614f8b7e34da377256a351a0bd,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -100465557361939176}
+      addedObject: {fileID: 7652538574607886192}
   m_SourcePrefab: {fileID: 100100000, guid: ca9a42614f8b7e34da377256a351a0bd, type: 3}
 --- !u!4 &8580466549517246936 stripped
 Transform:
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 272093217
+  GlobalObjectIdHash: 2022214269
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-100465557361939176
+--- !u!114 &7652538574607886192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

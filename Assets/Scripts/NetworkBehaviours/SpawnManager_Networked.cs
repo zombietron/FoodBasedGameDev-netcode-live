@@ -27,7 +27,6 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
     int spawnLocationIndex = 0;
 
 
-
     /*
      * WaveManager now connected to GameManager. The game manager tells 
      * the wave manager when its time to spawn a wave which then
@@ -51,12 +50,10 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
                     spawnPoints[spawnLocationIndex].position,
                     Quaternion.identity);
 
+                var enemyHP = spawnedEnemy.gameObject.GetComponent<HP>();
+                enemyHP.originalPrefabKey = enemy.gameObject;
+
                 spawnedEnemy.Spawn();
-
-                var enemyCollisionHandler =
-                    spawnedEnemy.gameObject.GetComponent<NetworkEnemyCollision>();
-
-                enemyCollisionHandler.originalPrefabKey = enemy.gameObject;
 
                 enemiesInScene.Add(spawnedEnemy.transform);
                 waveMgr.wave.AddEnemyToWaveCount();
@@ -65,14 +62,11 @@ public class SpawnManager_Networked : SingletonNetwork<SpawnManager_Networked>
                     spawnLocationIndex >= spawnPoints.Count - 1 ?
                         0 : spawnLocationIndex + 1;
 
-                //spawnedEnemy.transform.parent = spawnedEnemies.transform;
                 yield return new WaitForSeconds(gap);
             }
             else
                 yield return new WaitUntil(
                     () => enemiesInScene.Count < waveMgr.wave.maxEnemiesSpawnedDuringWave);
-
-
         }
 
         yield break;
