@@ -147,6 +147,7 @@ public class NetworkedPlayerController : NetworkBehaviour
     public void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("foodStall") || !IsOwner) return;
+        
         stallBehavior = other.gameObject.GetComponent<StallBehavior>();
         stallBehavior.DisplayUseInstructions(true);
         isInteractable = true;

@@ -147,8 +147,15 @@ public class HP : NetworkBehaviour
             //    and handle any server and client specific updates. 
             GetComponent<NetworkedPlayerController>().IsDead = true;            //pc.isDead = true;
             GameManager_Networked.Instance.PlayersInGame--;
-            isInteractible = false;
-            gameObject.GetComponentInChildren<Animator>().SetTrigger("isDead");
+            PlayerIsDeadRpc();
         }
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void PlayerIsDeadRpc()
+    {
+        isInteractible = false;
+        gameObject.GetComponentInChildren<Animator>().SetTrigger("isDead");
+        Debug.Log($"{OwnerClientId} is dead");
     }
 }

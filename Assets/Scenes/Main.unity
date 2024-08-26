@@ -4505,6 +4505,8 @@ MonoBehaviour:
   firstRun: 1
   gameState: 0
   timer: {fileID: 533205061}
+  playersInGame: 0
+  firstConnect: 1
 --- !u!1 &533205054
 GameObject:
   m_ObjectHideFlags: 0
@@ -11693,7 +11695,7 @@ MonoBehaviour:
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
     Address: 127.0.0.1
-    Port: 7777
+    Port: 7778
     ServerListenAddress: 127.0.0.1
   DebugSimulator:
     PacketDelayMS: 0
