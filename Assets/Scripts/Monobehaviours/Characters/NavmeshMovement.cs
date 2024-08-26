@@ -21,12 +21,21 @@ public class NavmeshMovement : NetworkBehaviour
     private GameObject selectedTarget;
 
     public UnityEvent<bool> inAttackRange;
-    
+
+    List<GameObject> targets;
     public override void OnNetworkSpawn()
     {
         agent.enabled = true;
         agent.speed = agentSpeed;
         atk = GetComponent<MeleAttack>();
+        
+        targets = new List<GameObject>();
+
+        foreach (KeyValuePair<ulong, NetworkClient> item in NetworkManager.Singleton.ConnectedClients)
+        {
+            targets.Add(item.Value.PlayerObject.gameObject);
+        }
+
         selectedTarget = SelectTargetPlayer();
         atk.Target = selectedTarget;
         base.OnNetworkSpawn();
@@ -47,9 +56,9 @@ public class NavmeshMovement : NetworkBehaviour
 
     private GameObject SelectTargetPlayer()
     {
-        GameObject[] target;
-        target = GameObject.FindGameObjectsWithTag("Player");
-        return target[Random.Range(0, target.Length)];
+
+
+        return targets[Random.Range(0, targets.Count-1)];
     }
 
     #region highlyImportant
@@ -90,14 +99,26 @@ BB&&G7?7!7!7JJ5PBBGBBGGGGGGGGGB#@@@@@@@@@&&&&@&@@&
         if (!IsServer)
             return;
 
+        if (!selectedTarget.GetComponent<HP>().Interactible && GameManager_Networked.Instance.PlayersInGame > 0)
+            selectedTarget = SelectTargetPlayer();
+        else
+            agent.ResetPath();
+
         agent.SetDestination(selectedTarget.transform.position);
         
         if(agent.destination != null) {
-            if (Vector3.Distance(agent.gameObject.transform.position,agent.destination) <=1f)
+            if (Vector3.Distance(agent.gameObject.transform.position,selectedTarget.transform.position) <=1f)
             {
-                Debug.Log(Vector3.Distance(agent.gameObject.transform.position, agent.destination));
-                // inAttackRange.Invoke(true);
+                Debug.Log(Vector3.Distance(agent.gameObject.transform.position, selectedTarget.transform.position));
+                inAttackRange.Invoke(true);
             }
         } 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(gameObject.transform.position, 1.0f);
+
     }
 }

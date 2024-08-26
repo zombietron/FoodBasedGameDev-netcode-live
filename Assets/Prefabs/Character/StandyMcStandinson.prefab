@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 8103841882583609639}
   - component: {fileID: -3651065450782251543}
   - component: {fileID: 5799860642196894193}
-  - component: {fileID: 3834543485832097549}
   - component: {fileID: 337512928}
   - component: {fileID: 337512926}
   - component: {fileID: 4372093541335875541}
@@ -190,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 586892325
+  GlobalObjectIdHash: 1734294150
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -216,20 +215,7 @@ MonoBehaviour:
   hitParticleSystemPrefab: {fileID: 0}
   deathSound: {fileID: 0}
   originalPrefabKey: {fileID: 0}
---- !u!114 &3834543485832097549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359069404705864245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44f35a197d32c414a928e358ecd7e2d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammoContainer: {fileID: 11400000, guid: 7d09bf2bc39a597458e5b70c0fe26104, type: 2}
-  atk: {fileID: 0}
+  isInteractible: 1
 --- !u!54 &337512928
 Rigidbody:
   m_ObjectHideFlags: 0

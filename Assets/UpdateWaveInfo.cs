@@ -11,7 +11,10 @@ public class UpdateWaveInfo : MonoBehaviour
 
     private void OnEnable()
     {
-        waveTitleText.text = "Wave " + wave.wave.waveNum.Value.ToString();
+        if (GameManager_Networked.Instance.gameState != GameManager_Networked.GameState.gameEnding)
+            waveTitleText.text = "Wave " + wave.wave.waveNum.Value.ToString();
+        else
+            waveTitleText.text = "Game Over";
     }
 
     // Update is called once per frame

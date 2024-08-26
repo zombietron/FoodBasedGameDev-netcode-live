@@ -21,7 +21,13 @@ public class NetworkedPlayerController : NetworkBehaviour
     //Attack information
     List<ProjectileInfo> projectiles;
     int projectileIndex;
- 
+    bool isDead = false;
+
+    public bool IsDead
+    {
+        set { isDead = value; }
+        get { return isDead; }
+    }
     public int ProjectileIndex
     {
         set { projectileIndex = value; }
@@ -44,7 +50,7 @@ public class NetworkedPlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner)
+        if (!IsOwner || isDead)
             return;
 
         var move = pActions.Player.Move.ReadValue<Vector2>();
@@ -69,6 +75,7 @@ public class NetworkedPlayerController : NetworkBehaviour
             {
                 playerInput.enabled = true;
                 SetProjectile(0);
+                IsDead = false;
             }
             else
                 playerInput.enabled = false;

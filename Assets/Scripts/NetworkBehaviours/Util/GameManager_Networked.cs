@@ -30,6 +30,23 @@ public class GameManager_Networked : NetworkBehaviour
     [SerializeField]
     TimerUiNetworked timer;
 
+    [SerializeField]
+    int playersInGame;
+
+    public int PlayersInGame
+    {
+        set 
+        { 
+            playersInGame = value;
+            
+            if (firstConnect)
+                firstConnect = false;
+            
+        }
+        get { return playersInGame; }
+    }
+
+    public bool firstConnect = true;
     void Awake()
     {
         if (Instance != null)
@@ -94,10 +111,23 @@ public class GameManager_Networked : NetworkBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!IsServer)
+            return;
+
+        if(!firstConnect && playersInGame ==  0)
+        {
+            ChangeGameState(GameState.gameEnding);
+        }
+    }
+
     public void EndGame()
     {
-        StartCoroutine("RestartGame");
+        //StartCoroutine("RestartGame");
         Debug.Log("I'm the end of the game");
+        EnableCountDownTimerRpc();
+        //return player to lobby?
     }
 
     public void RestartGame()

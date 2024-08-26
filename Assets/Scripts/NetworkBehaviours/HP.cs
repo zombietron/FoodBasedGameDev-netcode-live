@@ -20,12 +20,19 @@ public class HP : NetworkBehaviour
     [HideInInspector]
     public GameObject originalPrefabKey;
 
+    [SerializeField] bool isInteractible = true;
+
+    public bool Interactible
+    {
+        get { return isInteractible; }
+    }
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
+        if(!isEnemy)
+            GameManager_Networked.Instance.PlayersInGame++;
+        
         currentHP.Value = totalHP;
-
         currentHP.OnValueChanged += OnCurrentHealthValueChanged;
     }
 
@@ -133,14 +140,15 @@ public class HP : NetworkBehaviour
     
         else // we're updating the player
         {
-            if (!IsOwner) //client
+            if (!IsOwner || !isInteractible) //client
                 return;
 
             // TODO: update this to run from right POV (from server),
             //    and handle any server and client specific updates. 
-            Monobehaviours.Characters.PlayerController pc = GetComponent<Monobehaviours.Characters.PlayerController>();
-            pc.isDead = true;
-            GameManager.Instance.ChangeGameState(GameManager.GameState.gameEnding);
+            GetComponent<NetworkedPlayerController>().IsDead = true;            //pc.isDead = true;
+            GameManager_Networked.Instance.PlayersInGame--;
+            isInteractible = false;
+            gameObject.GetComponentInChildren<Animator>().SetTrigger("isDead");
         }
     }
 }
