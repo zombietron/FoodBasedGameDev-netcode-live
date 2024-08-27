@@ -47,14 +47,14 @@ namespace Monobehaviours.Characters
             }
             activeFoodTypeToThrow = allFoodTypes[0];
 
-            Debug.Log("Starting Velocity is: " + rb.velocity);
+            Debug.Log("Starting Velocity is: " + rb.linearVelocity);
         }
 
         void OnMove(InputValue value)
         {
             move = value.Get<Vector2>();
             moveForce = new Vector3(-move.x, 0.0f, -move.y);
-            Quaternion toRotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
+            Quaternion toRotation = Quaternion.LookRotation(rb.linearVelocity, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
             moving = !moving;
 
@@ -117,10 +117,10 @@ namespace Monobehaviours.Characters
                 anim.SetTrigger("isDead");
             }
 
-            rb.velocity = moveForce * moveSpeed; //change to updating transform instead
-            if (rb.velocity != Vector3.zero)
+            rb.linearVelocity = moveForce * moveSpeed; //change to updating transform instead
+            if (rb.linearVelocity != Vector3.zero)
             {
-                transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
+                transform.rotation = Quaternion.LookRotation(rb.linearVelocity, Vector3.up);
             }
 
             if(move==Vector2.zero)

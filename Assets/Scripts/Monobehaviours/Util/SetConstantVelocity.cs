@@ -30,16 +30,16 @@ public class SetConstantVelocity : MonoBehaviour
         switch(direction)
         {
             case movementDirection.forward:
-                rb.velocity = objectSpeed * transform.forward;
+                rb.linearVelocity = objectSpeed * transform.forward;
                 break;
             case movementDirection.backward:
-                rb.velocity = objectSpeed * -transform.forward;
+                rb.linearVelocity = objectSpeed * -transform.forward;
                 break;
             case movementDirection.left:
-                rb.velocity = objectSpeed * -transform.right;
+                rb.linearVelocity = objectSpeed * -transform.right;
                 break;
             case movementDirection.right:
-                rb.velocity = objectSpeed * transform.right;
+                rb.linearVelocity = objectSpeed * transform.right;
                 break;
             default: 
                 break;
@@ -49,6 +49,6 @@ public class SetConstantVelocity : MonoBehaviour
 
     public void SetObjectVelocity(Vector3 forward)
     {
-        rb.velocity = objectSpeed * forward;
+        rb.linearVelocity = objectSpeed * forward;
     }
 }
