@@ -53,6 +53,7 @@ public class TimerUiNetworked : NetworkBehaviour
         yield break;
     }
 
+    
     [Rpc(SendTo.ClientsAndHost)]
     public void SetTimerTextRpc(int value)
     {
